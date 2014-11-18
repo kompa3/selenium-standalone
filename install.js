@@ -130,7 +130,9 @@ function getDownloadStream(downloadUrl, cb) {
 
       cb(null, res);
     })
-    .once('error', cb.bind(null, new Error('Could not download ' + downloadUrl)));
+    .once('error', function(error) {
+      cb(new Error('Could not download ' + downloadUrl + '. Error: ' + error));
+    });
 
   // initiate request
   r.end();
